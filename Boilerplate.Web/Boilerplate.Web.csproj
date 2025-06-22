@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Company>Codeparts</Company>
+        <Product>Boilerplate</Product>
+        <Copyright></Copyright>
+        <RepositoryUrl>https://github.com/eskat0n/boilerplate-dotnet.git</RepositoryUrl>
+        <Nullable>enable</Nullable>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>default</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Boilerplate.Core\Boilerplate.Core.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,50 @@
+﻿name: Publish packages
+
+on:
+  workflow_dispatch:
+
+env:
+  VERSION: 0.0.1-build.${{ github.run_number }}
+
+jobs:
+  build:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
+          
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+            
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build -c Release --no-restore "/p:Version=$VERSION" "/p:FileVersion=$VERSION"
+        
+      - name: Create packages
+        run: |
+          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Core/Boilerplate.Core.csproj
+          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs/Boilerplate.Jobs.csproj
+          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs.HostedRunner/Boilerplate.Jobs.HostedRunner.csproj
+          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs.Repositories.Mongo/Boilerplate.Jobs.Repositories.Mongo.csproj
+          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Web/Boilerplate.Web.csproj
+
+      - name: Publish packages to GitHub
+        run: |
+          dotnet nuget push ./**/*.nupkg
