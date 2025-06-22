@@ -39,12 +39,12 @@ jobs:
         
       - name: Create packages
         run: |
-          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Core/Boilerplate.Core.csproj
-          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs/Boilerplate.Jobs.csproj
-          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs.HostedRunner/Boilerplate.Jobs.HostedRunner.csproj
-          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs.Repositories.Mongo/Boilerplate.Jobs.Repositories.Mongo.csproj
-          dotnet pack -c Release "/p:Version=$VERSION" ./Boilerplate.Web/Boilerplate.Web.csproj
+          dotnet pack --no-build -c Release "/p:Version=$VERSION" ./Boilerplate.Core/Boilerplate.Core.csproj
+          dotnet pack --no-build -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs/Boilerplate.Jobs.csproj
+          dotnet pack --no-build -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs.HostedRunner/Boilerplate.Jobs.HostedRunner.csproj
+          dotnet pack --no-build -c Release "/p:Version=$VERSION" ./Boilerplate.Jobs.Repositories.Mongo/Boilerplate.Jobs.Repositories.Mongo.csproj
+          dotnet pack --no-build -c Release "/p:Version=$VERSION" ./Boilerplate.Web/Boilerplate.Web.csproj
 
-      - name: Publish packages to GitHub
+      - name: Publish packages
         run: |
-          dotnet nuget push ./**/*.nupkg
+          dotnet nuget push ./**/*.nupkg --source https://api.nuget.org/v3/index.json
