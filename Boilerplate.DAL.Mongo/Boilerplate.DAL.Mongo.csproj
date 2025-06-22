@@ -8,6 +8,8 @@
         <RootNamespace>Boilerplate.DAL.MongoDB</RootNamespace>
         <TargetFramework>net8.0</TargetFramework>
         <LangVersion>default</LangVersion>
+        <PackageId>Codeparts.Boilerplate.DAL.Mongo</PackageId>
+        <Authors>Codeparts</Authors>
     </PropertyGroup>
 
     <ItemGroup>

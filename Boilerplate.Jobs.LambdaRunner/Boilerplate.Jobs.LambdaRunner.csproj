@@ -7,6 +7,8 @@
         <RepositoryUrl>https://github.com/eskat0n/boilerplate-dotnet.git</RepositoryUrl>
         <TargetFramework>net8.0</TargetFramework>
         <LangVersion>default</LangVersion>
+        <PackageId>Codeparts.Boilerplate.Jobs.LambdaRunner</PackageId>
+        <Authors>Codeparts</Authors>
     </PropertyGroup>
 
     <ItemGroup>

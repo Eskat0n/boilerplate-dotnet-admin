@@ -4,6 +4,8 @@
         <Nullable>enable</Nullable>
         <TargetFramework>net8.0</TargetFramework>
         <LangVersion>default</LangVersion>
+        <PackageId>Codeparts.Boilerplate.Jobs.Repositories.MySql</PackageId>
+        <Authors>Codeparts</Authors>
     </PropertyGroup>
 
     <ItemGroup>
